@@ -36,14 +36,15 @@
 
 	const { category } = Astro.params
 	const res = await fetch(`${url}/top-headlines?country=us&category=${category}&apikey=${apikey}`)
-	const { articles } = await res.json() as { articles:News[] } 
+	const data = await res.json() 
+	console.log(data)
 ---
 
 <Layout title={category}>
 	<Navbar />
 	<main class="w-full h-screen flex justify-center items-end pb-3 bg-[#0c0c0c]">
 		<div class=" w-[90%] h-[500px] p-2 flex flex-wrap gap-2 overflow-y-auto justify-center" >
-		{articles.map((news:News)=>(
+		{data.status != "error"?data.articles.map((news:News)=>(
 			<a href={news.url}>
 				<Card class=" w-[300px] border-black bg-black text-white h-full">
 					<CardHeader>
@@ -62,7 +63,9 @@
 					</CardFooter>
 				</Card>
 			</a>
-		))}
+		)):(
+			<h2 class="text-white">Sorry, there was an error. Please come back tomorrow</h2>
+		)}
 		</div>
 	</main>
 </Layout>

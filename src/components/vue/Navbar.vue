@@ -15,10 +15,10 @@
         <div class="text-xl font-bold bg-gradient-to-r from-[#4a90e2] to-[#8e44ad] bg-clip-text text-transparent">
             ambaNews
         </div>
-        <Button class=" bg-gradient-to-r from-[#4a90e2] to-[#8e44ad]  rounded text-white" variant="outline"><a href="/business">back</a></Button>
+        <Button class=" bg-gradient-to-r from-[#4a90e2] to-[#8e44ad]  rounded text-white" variant="outline"><a href="/news-app/business">back</a></Button>
     </header>
     <header class="w-full fixed top-[60px] h-[30px] flex items-center justify-around flex-wrap px-3 gap-3">
-        <a v-for="cat,i in categories" :key="i" :href="`/${cat}`" class="text-white " >
+        <a v-for="cat,i in categories" :key="i" :href="`/news-app/${cat}`" class="text-white " >
             {{  cat  }}
         </a>
     </header>   
