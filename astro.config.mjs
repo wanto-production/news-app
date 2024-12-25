@@ -11,7 +11,7 @@ export default defineConfig({
   output:"static",
   base:'/news-app/',
   site:'https://wanto-production.github.io/news-app',
-  integrations: [tailwind(), vue({ appEntrypoint:'./src/app.ts' }), mdx()],
+  integrations: [tailwind({ applyBaseStyles:false }), vue({ appEntrypoint:'./src/app.ts' }), mdx()],
 
   vite:{
     plugins:[
