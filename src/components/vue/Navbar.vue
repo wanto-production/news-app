@@ -1,10 +1,10 @@
 <script setup lang="ts">
     const categories = [
-       "business",
-			"health",
-			"science",
-			"sports",
-			"technology"
+        "business",
+		"health",
+		"science",
+		"sports",
+		"technology"
     ];
 
     import Button from '../ui/button/Button.vue';
