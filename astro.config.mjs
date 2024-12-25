@@ -19,6 +19,9 @@ export default defineConfig({
         dts:'./.astro/import.d.ts'
       }),
     ],
+    build:{
+      outDir:'./dist'
+    }
   },
 
   adapter: vercel()
