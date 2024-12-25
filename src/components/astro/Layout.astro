@@ -1,4 +1,5 @@
 ---
+	import '@/app.css'
 	const { 
 		title = "loading..." 
 	} = Astro.props as { title:string }
@@ -21,11 +22,3 @@
 			<slot />
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		padding: 0;
-	}
-</style>
