@@ -1,6 +1,5 @@
 <script setup lang="ts">
     const categories = [
-        "business",
 		"health",
 		"science",
 		"sports",
