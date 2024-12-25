@@ -9,6 +9,7 @@ import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
+  base:'/news-app/',
   output:"static",
   integrations: [tailwind(), vue({ appEntrypoint:'./src/app.ts' }), mdx()],
   site:"https://wanto-production.github.io/news-app",
