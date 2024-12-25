@@ -3,6 +3,7 @@
 
 	export const getStaticPaths = (() => {
 		const categories = [
+			"business",
 			"health",
 			"science",
 			"sports",
@@ -18,7 +19,7 @@
 	}) satisfies GetStaticPaths;
 
 	import Layout from "@/components/astro/Layout.astro"
-	import axios from 'axios'
+	import Navbar from '@/components/vue/Navbar.vue'
 	import { getSecret } from "astro:env/server"
 	import { Image } from "astro:assets"
 	import {
@@ -31,21 +32,15 @@
 
 
 	const apikey = getSecret('SECRET_NEWS_APIKEY')
-	const url = getSecret('SECRET_NEWS_URL')
+	const url = "https://newsapi.org/v2"
 
 	const { category } = Astro.params
-
-	const { data:{ articles } } = await axios.get(`${url}/top-headlines`,{
-		params:{
-			country: 'us', 
-			category,
-			apiKey: apikey,
-			pageSize:10
-		}
-	})
+	const res = await fetch(`${url}/top-headlines?country=us&category=${category}&apikey=${apikey}`)
+	const { articles } = await res.json() as { articles:News[] } 
 ---
 
 <Layout title={category}>
+	<Navbar />
 	<main class="w-full h-screen flex justify-center items-end pb-3 bg-[#0c0c0c]">
 		<div class=" w-[90%] h-[500px] p-2 flex flex-wrap gap-2 overflow-y-auto justify-center" >
 		{articles.map((news:News)=>(

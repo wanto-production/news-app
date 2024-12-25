@@ -3,7 +3,6 @@
 	const { 
 		title = "loading..." 
 	} = Astro.props as { title:string }
-	import Navbar from "../vue/Navbar.vue"
 ---
 
 <!doctype html>
@@ -18,7 +17,6 @@
 		<title>ambaNews | {title}</title>
 	</head>
 	<body>
-		<Navbar />
 			<slot />
 	</body>
 </html>
