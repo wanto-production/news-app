@@ -1,0 +1,87 @@
+---
+	import type { GetStaticPaths } from "astro";
+
+	export const getStaticPaths = (() => {
+		const categories = [
+			"business",
+			"entertainment",
+			"general",
+			"health",
+			"science",
+			"sports",
+			"technology"
+    	];
+
+		return categories.map((category:string)=>{
+			return{
+				params:{ category }
+			}
+		})
+		
+	}) satisfies GetStaticPaths;
+
+	import Layout from "@/components/astro/Layout.astro"
+	import axios from 'axios'
+	import { getSecret } from "astro:env/server"
+	import { Image } from "astro:assets"
+	import {
+		Card,
+		CardHeader,
+		CardTitle,
+		CardContent,
+		CardFooter
+	} from '@/components/ui/card'
+
+
+	const apikey = getSecret('SECRET_NEWS_APIKEY')
+	const url = getSecret('SECRET_NEWS_URL')
+
+	const { category } = Astro.params
+
+	const { data:{ articles } } = await axios.get(`${url}/top-headlines`,{
+		params:{
+			country: 'us', 
+			category,
+			apiKey: apikey,
+		}
+	})
+---
+
+<Layout title={category}>
+	<main class="w-full h-screen flex justify-center items-end pb-3 bg-[#0c0c0c]">
+		<div class=" w-[90%] h-[500px] p-2 flex flex-wrap gap-2 overflow-y-auto justify-center" >
+		{articles.map((news:News)=>(
+			<a href={news.url}>
+				<Card class=" w-[300px] border-black bg-black text-white h-full">
+					<CardHeader>
+						<CardTitle>{ news.title }</CardTitle>
+					</CardHeader>
+					<CardContent>
+						{news.urlToImage?(
+							<Image src={news.urlToImage} alt="" width="300" height="200" format="avif"/>
+						):(
+							<Image src="https://dummyimage.com/150x150/808080/FFFFFF&text=tidak ada gambar" alt="" width="300" height="200" format="avif"/>
+						)}
+						<p>{ news.content?.replaceAll(/(<\/?li>|<\/?ul>)/g,"") }</p>
+					</CardContent>
+					<CardFooter>
+						<h2>{ news.source.name }</h2>
+					</CardFooter>
+				</Card>
+			</a>
+		))}
+		</div>
+	</main>
+</Layout>
+
+<style>
+div::-webkit-scrollbar{
+	width: 10px;
+	border-radius:10px;
+	background: linear-gradient(45deg, #4a90e2, #8e44ad);
+}
+div::-webkit-scrollbar-thumb{
+	background: black;	
+	border-radius:10px;
+}
+</style>
