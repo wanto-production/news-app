@@ -13,6 +13,7 @@ export default defineConfig({
   integrations: [tailwind(), vue({ appEntrypoint:'./src/app.ts' }), mdx()],
 
   vite:{
+    base:'/news-app/',
     plugins:[
       Autoimport({
         imports:["vue","@vueuse/core"],
