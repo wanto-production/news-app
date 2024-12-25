@@ -37,7 +37,6 @@
 	const { category } = Astro.params
 	const res = await fetch(`${url}/top-headlines?country=us&category=${category}&apikey=${apikey}`)
 	const data = await res.json() 
-	console.log(data)
 ---
 
 <Layout title={category}>
