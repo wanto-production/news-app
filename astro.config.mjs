@@ -10,7 +10,7 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   output:"static",
   base:'/news-app/',
-  site:'https://wanto-production.github.io/news-app',
+  site:'https://wanto-production.github.io',
   integrations: [tailwind({ applyBaseStyles:false }), vue({ appEntrypoint:'./src/app.ts' }), mdx()],
 
   vite:{
